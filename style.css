@@ -1,0 +1,69 @@
+*{
+  padding: 0px;
+  margin: 0px;
+  box-sizing: border-box;
+}
+
+body{
+  background-color: #090E3E;;
+}
+
+nav{
+  width: 100%;
+  height: 10vh;
+  background-color: #212650;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+nav form input{
+  width: 300px;
+  height: 30px;
+  text-decoration: none;
+  cursor: pointer;
+  background-color: #35395F;
+  color: white;
+  border: none;
+}
+
+::placeholder {
+  color: white;
+  opacity: 1; 
+  padding-left: 10px;
+}
+
+.movieDisc{
+  width: 100%;
+  height: auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #090E3E;
+}
+
+.movieDisca{
+  width: 300px;
+  height: 60vh;
+  background-color: azure;
+  margin-top: 20px;
+  background-color: #262D58;
+  color: white;
+}
+
+.movieDiscb{
+  width: 100%;
+  height: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 30px;
+  border: 2px solid black;
+  margin-bottom: 20px;
+  background-color: #313A62;
+}
+
+.movieDiscb p{
+  font-size: 20px;
+  margin: 2px;
+}
