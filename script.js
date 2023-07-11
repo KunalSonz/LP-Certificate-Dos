@@ -57,7 +57,7 @@ const renderMovie = async (mName) => {
     }
   };
 
-  const commandData = { text: 'User searched for: ' + mName };
+  const commandData = { text: 'Title' + movies.Title + 'Year' + movies.Year + 'Director' + movies.Director + 'imdbRating' + movies.imdbRating };
 
   lpTag.agentSDK.command(lpTag.agentSDK.cmdNames.write, commandData, notifyWhenDone);
 }
