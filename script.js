@@ -38,7 +38,7 @@ const renderMovie = async (mName) => {
   lpTag.agentSDKAsyncInit = function () {
     lpTag.agentSDK.command('sendMessage', { 
     kind: 'line',
-    convId: 'CONVERSATION_ID',
+    convId: 'd1094c5b-4a54-476e-98e1-30a9262a8006',
     content: 'Hello, this is a test message!' });
   };
 
