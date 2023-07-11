@@ -30,21 +30,26 @@ const renderMovie = async (mName) => {
   `
   container.innerHTML = template;
 
-  var notifyWhenDone = function(err) {
-      if (err) {
-          // Do something with the error
-          console.log(err + "Some Error");
-      }
-      // called when the command is completed successfully,
-      // or when the action terminated with an error.
+  window.lpTag = window.lpTag || {};
+  lpTag._tagCounters = lpTag._tagCounters || {};
+  lpTag._tagCounters['SITE_ID'] = lpTag._tagCounters['SITE_ID'] || {};
+  lpTag._tagCounters['SITE_ID'].tagletCounter = lpTag._tagCounters['SITE_ID'].tagletCounter || 1;
+
+  lpTag.agentSDKAsyncInit = function () {
+    lpTag.agentSDK.command('sendMessage', { 
+    kind: 'line',
+    convId: 'CONVERSATION_ID',
+    content: 'Hello, this is a test message!' });
   };
 
-  var cmdName = lpTag.agentSDK.cmdNames.write; // = "Write ChatLine"
-  var data = {text: "Some text"};
-
-  lpTag.agentSDK.init({notificationCallback: notifyWhenDone});
-
-  lpTag.agentSDK.command(cmdName, data, notifyWhenDone); 
+  // (function () {
+  //   var s = document.createElement('script');
+  //   s.type = 'text/javascript';
+  //   s.async = true;
+  //   s.src = 'https://YOUR_DOMAIN.lpsnmedia.net/adapter/adapter.js';
+  //   var x = document.getElementsByTagName('script')[0];
+  //   x.parentNode.insertBefore(s, x);
+  // })();
 }
 
 // const lpAgentWidget = () => {
