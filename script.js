@@ -30,26 +30,28 @@ const renderMovie = async (mName) => {
   `
   container.innerHTML = template;
 
-  window.lpTag = window.lpTag || {};
-  lpTag._tagCounters = lpTag._tagCounters || {};
-  lpTag._tagCounters['SITE_ID'] = lpTag._tagCounters['SITE_ID'] || {};
-  lpTag._tagCounters['SITE_ID'].tagletCounter = lpTag._tagCounters['SITE_ID'].tagletCounter || 1;
+  var notificationHandler = function(data) {
+    // Do something with the notifications
+    console.log("Error Occured in notify : "+data);
+    };
 
-  lpTag.agentSDKAsyncInit = function () {
-    lpTag.agentSDK.command('sendMessage', { 
-    kind: 'line',
-    convId: 'd1094c5b-4a54-476e-98e1-30a9262a8006',
-    content: 'Hello, this is a test message!' });
-  };
+  var notifyWhenDone = function(err) {
+    if (err){
+    console.log("Error Occured in notify : "+err);
+    }
+    
+    errorMessage.innerHTML = "Unable to find the movie";
+    };
+    
+    var chatText = "chatTranscript.lines";
+    
+    lpTag.agentSDK.init({notificationCallback: notificationHandler});
 
-  // (function () {
-  //   var s = document.createElement('script');
-  //   s.type = 'text/javascript';
-  //   s.async = true;
-  //   s.src = 'https://YOUR_DOMAIN.lpsnmedia.net/adapter/adapter.js';
-  //   var x = document.getElementsByTagName('script')[0];
-  //   x.parentNode.insertBefore(s, x);
-  // })();
+    var cmdName = lpTag.agentSDK.cmdNames.write; // = "Write ChatLine"
+    var data = {text: movies.Title};
+
+    lpTag.agentSDK.command(cmdName, data, notifyWhenDone);
+    //lpTag.agentSDK.bind(chatText, movies, notifyWhenDone);
 }
 
 // const lpAgentWidget = () => {
