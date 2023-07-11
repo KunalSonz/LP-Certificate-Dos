@@ -90,6 +90,6 @@ searchForm.addEventListener('submit' , (e) => {
 
 
 window.addEventListener('DOMContentLoaded', () => {
-  renderMovie();
+  // renderMovie();
 
 });
