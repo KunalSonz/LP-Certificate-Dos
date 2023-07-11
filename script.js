@@ -29,25 +29,41 @@ const renderMovie = async (mName) => {
   </div>
   `
   container.innerHTML = template;
+
+  var notifyWhenDone = function(err) {
+      if (err) {
+          // Do something with the error
+          console.log(err + "Some Error");
+      }
+      // called when the command is completed successfully,
+      // or when the action terminated with an error.
+  };
+
+  var cmdName = lpTag.agentSDK.cmdNames.write; // = "Write ChatLine"
+  var data = {text: "Some text"};
+
+  lpTag.agentSDK.init({notificationCallback: notifyWhenDone});
+
+  lpTag.agentSDK.command(cmdName, data, notifyWhenDone); 
 }
 
-const lpAgentWidget = () => {
-  {
-      var notifyWhenDone = function(err) {
-          if (err) {
-              // Do something with the error
-              console.log(err + "Some Error");
-          }
-          // called when the command is completed successfully, 
-          // or when the action terminated with an error.
-      };
+// const lpAgentWidget = () => {
+//   {
+//       var notifyWhenDone = function(err) {
+//           if (err) {
+//               // Do something with the error
+//               console.log(err + "Some Error");
+//           }
+//           // called when the command is completed successfully,
+//           // or when the action terminated with an error.
+//       };
 
-      var cmdName = lpTag.agentSDK.cmdNames.write; // = "Write ChatLine"
-      var data = {text: "Some text"};
+//       var cmdName = lpTag.agentSDK.cmdNames.write; // = "Write ChatLine"
+//       var data = {text: "Some text"};
 
-      lpTag.agentSDK.command(cmdName, data, notifyWhenDone); 
-  }
-};
+//       lpTag.agentSDK.command(cmdName, data, notifyWhenDone); 
+//   }
+// };
 
 searchForm.addEventListener('submit' , (e) => {
   e.preventDefault();
