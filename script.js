@@ -30,28 +30,36 @@ const renderMovie = async (mName) => {
   `
   container.innerHTML = template;
 
-  var notificationHandler = function(data) {
-    // Do something with the notifications
-    console.log("Error Occured in notify : "+data);
-    };
+  {
+      var notificationHandler = function(data) {
+      // Do something with the notifications
+      };
 
-  var notifyWhenDone = function(err) {
-    if (err){
-    console.log("Error Occured in notify : "+err);
+      var focusHandler = function() {
+      // Do something when the visitor is focused
+      // Assume the visitor is focused to begin with
+      };
+
+      var blurHandler = function() {
+      // Do something when the visitor is blurred
+      // Assume the visitor is focused to begin with
+      };
+  }
+      lpTag.agentSDK.init({
+      notificationCallback: notificationHandler,
+      visitorFocusedCallback: focusHandler,
+      visitorBlurredCallback: blurHandler
+  });
+
+  const notifyWhenDone = function (err) {
+    if (err) {
+      console.log("Error Occurred in notifyWhenDone: " + err);
     }
-    
-    errorMessage.innerHTML = "Unable to find the movie";
-    };
-    
-    var chatText = "chatTranscript.lines";
-    
-    lpTag.agentSDK.init({notificationCallback: notificationHandler});
+  };
 
-    var cmdName = lpTag.agentSDK.cmdNames.write; // = "Write ChatLine"
-    var data = {text: movies.Title};
+  const commandData = { text: 'User searched for: ' + mName };
 
-    lpTag.agentSDK.command(cmdName, data, notifyWhenDone);
-    //lpTag.agentSDK.bind(chatText, movies, notifyWhenDone);
+  lpTag.agentSDK.command(lpTag.agentSDK.cmdNames.write, commandData, notifyWhenDone);
 }
 
 // const lpAgentWidget = () => {
@@ -76,8 +84,8 @@ searchForm.addEventListener('submit' , (e) => {
   e.preventDefault();
   mName = searchForm.term.value.trim();
   //console.log(mName);
+  
   renderMovie(mName);
-
 })
 
 
